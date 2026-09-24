@@ -1,0 +1,56 @@
+  252  gh repo fork danilofreire/datasci350-quiz01
+  253  ls
+  254  cd datasci350-quiz01
+  255  touch commands.txt
+  256  git checkout -b station-upgrade
+  257  mkdir results
+  258  touch results/summary.md && echo "Analysis of the first field season." >> results/summary.md
+  259  git add results
+  260  git commit -m "Add results directory"
+  261  mv data/sensor-readings.csv data/station-data.csv
+  262  mkdir scripts/archive && cp scripts/*.py scripts/archive
+  263  rm docs/notes.md
+  264  git add .
+  265  git commit -m "Update station files"
+  266  touch .gitignore
+  267  echo "temp/" >> .gitignore
+  268  echo "log?.txt" >> .gitignore
+  269  cat .gitignore
+  270  git add .gitignore && git commit -m "Add gitignore"
+  271  touch log{1..4}.txt
+  272  git status
+Output: On branch station-upgrade
+nothing to commit, working tree clean
+Explanation: The log files do not appear because previously I recorded them in the .gitignore file, which hides the log files.
+  273  cat data/station-data.csv | wc -l >> results/summary.md
+  274  cat results/summary.md
+  275  nano scripts/03-plot.py
+  276  git diff
+Output: diff --git a/results/summary.md b/results/summary.md
+index 295821a..817eec6 100644
+--- a/results/summary.md
++++ b/results/summary.md
+@@ -1 +1,2 @@
+ Analysis of the first field season.
++      41
+diff --git a/scripts/03-plot.py b/scripts/03-plot.py
+index 70ea841..c5af7da 100644
+--- a/scripts/03-plot.py
++++ b/scripts/03-plot.py
+@@ -1,3 +1,4 @@
++# Reviewed for the field season report
+ # Plot the daily temperature readings
+ # Prints a simple text chart, one bar per reading.
+Explanation: the lines starting with + mean that those are newly added lines from the previous commit.
+  277  git add . && git commit -m "Update analyss"
+  278  git commit --amend -m "Update analysis"
+  279  git checkout main
+  280  git merge station-upgrade
+  281  git log --oneline
+bb10c36 (HEAD -> main, station-upgrade) Update analysis
+1d80516 Add gitignore
+56674b5 Update station files
+3ed4766 Add results directory
+a22b29e (upstream/main, origin/main, origin/HEAD) docs(readme): note committing commands.txt before task 18 and force push for bonus 2
+b645f85 feat: quiz 01 starter files
+  282  history | tail -n 60 > commands.txt
